@@ -1,0 +1,93 @@
+{
+  "entities": {
+    "Standard": {
+      "title": "Biology Standard",
+      "description": "Represents a Mississippi Biology EOC standard.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "keywords": { "type": "array", "items": { "type": "string" } },
+        "content": { "type": "string" }
+      },
+      "required": ["id", "title", "description", "content"]
+    },
+    "QuizResult": {
+      "title": "Quiz Result",
+      "description": "Stores the outcome of a quiz session.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "standardId": { "type": "string" },
+        "score": { "type": "number" },
+        "totalQuestions": { "type": "number" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "question": { "type": "string" },
+        "isCorrect": { "type": "boolean" }
+      },
+      "required": ["userId", "standardId", "score", "totalQuestions", "timestamp"]
+    },
+    "Chat": {
+      "title": "Chat Message",
+      "description": "Stores a single message in a chat conversation.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "standardId": { "type": "string" },
+        "role": { "type": "string", "enum": ["user", "ai", "system"] },
+        "content": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "standardId", "role", "content", "timestamp"]
+    },
+    "User": {
+      "title": "User Profile",
+      "description": "Information about a registered user.",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "lastLogin": { "type": "string", "format": "date-time" }
+      },
+      "required": ["uid", "email"]
+    },
+    "PracticeQuestion": {
+      "title": "Practice Question",
+      "description": "A multiple choice question for state test practice.",
+      "type": "object",
+      "properties": {
+        "standardId": { "type": "string" },
+        "question": { "type": "string" },
+        "options": { "type": "array", "items": { "type": "string" } },
+        "correctAnswer": { "type": "string" },
+        "explanation": { "type": "string" },
+        "order": { "type": "number" }
+      },
+      "required": ["standardId", "question", "options", "correctAnswer", "explanation"]
+    }
+  },
+  "firestore": {
+    "standards": {
+      "schema": "Standard",
+      "description": "Collection of Mississippi biology standards."
+    },
+    "quiz_results": {
+      "schema": "QuizResult",
+      "description": "Results of quizzes taken by students."
+    },
+    "chats": {
+      "schema": "Chat",
+      "description": "Persisted chat history for users."
+    },
+    "users": {
+      "schema": "User",
+      "description": "User profiles and metadata."
+    },
+    "practice_questions": {
+      "schema": "PracticeQuestion",
+      "description": "Official-style practice questions for each standard."
+    }
+  }
+}

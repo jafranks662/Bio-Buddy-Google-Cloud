@@ -1,0 +1,72 @@
+@import url('https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css');
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #111827; /* gray-900 */
+  color: #F3F4F6; /* gray-100 */
+}
+
+body {
+  /* Fallback to dvh, then use the JS calculated --vh if available */
+  height: 100dvh;
+  height: var(--vh, 100dvh);
+}
+
+.markdown-container p {
+  margin-bottom: 0.5rem;
+}
+
+.markdown-container p:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-container ul, .markdown-container ol {
+  margin-left: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.markdown-container ul {
+  list-style-type: disc;
+}
+
+.markdown-container ol {
+  list-style-type: decimal;
+}
+
+.markdown-container li {
+  margin-bottom: 0.25rem;
+}
+
+.markdown-container strong {
+  font-weight: 700;
+  color: #fff;
+}
+
+.markdown-container em {
+  font-style: italic;
+}
+
+.markdown-container code {
+  background-color: #374151; /* gray-700 */
+  padding: 0.1rem 0.3rem;
+  border-radius: 0.25rem;
+  font-family: monospace;
+}
+
+/* KaTeX adjustments */
+.katex-display {
+  margin: 0.5rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.markdown-container blockquote {
+  border-left: 4px solid #4B5563;
+  padding-left: 1rem;
+  font-style: italic;
+  color: #9CA3AF;
+  margin-bottom: 0.5rem;
+}

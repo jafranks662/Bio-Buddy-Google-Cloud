@@ -1,0 +1,6 @@
+{
+  "name": "Mississippi Biology Tutor",
+  "description": "An AI-powered tutor and quiz tool to help 9th-grade students in Mississippi prepare for their state biology test. It offers a study mode for conceptual understanding and a quiz mode for practice, with content tailored to the state standards and local context.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

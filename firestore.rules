@@ -1,0 +1,62 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && 
+             request.auth.token.email == 'jafrankenstein@gmail.com' && 
+             request.auth.token.email_verified == true;
+    }
+
+    // Standards are public to read
+    match /standards/{standardId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Quiz results are private to the user
+    match /quiz_results/{resultId} {
+      allow read: if isOwner(resource.data.userId);
+      allow create: if isOwner(request.resource.data.userId);
+      allow update, delete: if false;
+    }
+
+    // Chat history is private to the user
+    match /chats/{chatId} {
+      allow read: if isOwner(resource.data.userId);
+      allow create: if isOwner(request.resource.data.userId);
+      allow update, delete: if false;
+    }
+
+    // User profiles are private to the user
+    match /users/{userId} {
+      allow read: if isOwner(userId);
+      allow create, update: if isOwner(userId);
+      allow delete: if false;
+    }
+
+    // Practice questions are public to read
+    match /practice_questions/{questionId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Connection test document
+    match /test/connection {
+      allow read: if true;
+    }
+  }
+}
